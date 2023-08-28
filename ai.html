@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>AI Universe Hub</title>
+    <!-- daisy ui  --> 
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+   body{
+    font-family: 'Work Sans', sans-serif;
+   }
+   .modal-1{
+    background: rgba(235, 87, 87, 0.05);
+
+   }
+   .modal-1 li{
+    
+   }
+   .showdetails{
+    background:linear-gradient(rgba(17, 17, 17, 0.60),rgba(17, 17, 17, 0.60));
+    fill: rgba(17, 17, 17, 0.60);
+
+   }
+   .scrollNo::-webkit-scrollbar{
+    display: none;
+    
+   }
+</style>
+</head>
+<body>
+<header></header>
+<main class="max-w-7xl mx-auto mt-8">
+  <section class="title-section">
+    <div class="text-center space-y-6">
+        <h1 class="text-4xl font-semibold text-center">AI Universe Hub</h1>
+        <button class="px-3 py-3 rounded-md bg-[#EB5757] text-white font-semibold">Sort By Date</button>
+        <input type="text" placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs" id="search" /> <button class="btn btn-primary" id="search-btn" onclick="loadSearch()">Search</button>
+
+        <div class="text-center hidden my-5" id="loading-search">
+          <!-- <span class="loading loading-ring loading-lg "></span> -->
+          <span class="loading loading-infinity loading-lg bg-primary text-3xl"></span>
+        </div>
+    </div>
+  </section>
+  <section class="main">
+    <div class="card-container my-4 grid lg:grid-cols-3 md:grid-cols-2 gap-5" id="card-container">
+       
+    </div>
+    <!-- load more button -->
+    <div class="text-center py-4 " id="load-more-div">
+      <button class="btn btn-outline btn-primary" id="load-more-btn" onclick="loadMore()">Load more</button>
+
+    </div>
+    <!-- loading -->
+    <div class="text-center hidden" id="loading">
+      <span class="loading loading-dots loading-md bg-error"></span>
+    </div>
+  </section>
+  
+</main>
+<section class="showdetails fixed top-0 h-[100vh] flex justify-center items-center  lg:px-20 md:px-16 hidden px-2" id="modal">
+  
+  <div class=" bg-white flex lg:flex-row md:flex-col flex-col lg:py-10 scrollNo gap-3 lg:p-10 md:p-10 p-5 lg:mx-20 md:mx-10  rounded-lg relative overflow-scroll h-[600px] ">
+    <i class="fa-solid fa-circle-xmark text-3xl text-black absolute -right-10 -top-36" id="cancel" onclick="hideModal()"></i>
+    <div class="modal-1 lg:p-10 md:p-10 p-4 rounded-lg space-y-3 flex-1 border-gray-300 border-[1px]">
+      <h1 class="text-2xl font-semibold text-black"><span id="detail"></span></h1>
+      
+      <div class="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 gap-4">
+        <div class="p-4 bg-white rounded-lg">
+          <h3 id="pay-info-1" class="text-[#03A30A] font-semibold">$10/month
+            Basic</h3>
+        </div>
+        <div class="p-6  bg-white rounded-lg">
+          <h3 id="pay-info-2" class="text-[#F28927] font-semibold">$50/month
+            Pro</h3>
+        </div>
+        <div class="p-4 bg-white rounded-lg">
+          <h3 id="pay-info-3" class="text-[#EB5757] font-semibold">Contact 
+            us
+            Enterprise</h3>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1">
+        <div>
+          <h1 class="text-3xl font-semibold text-black">Features</h1>
+          <div class="py-2">
+            <li id="features-1"></li>
+            <li id="features-2"></li>
+            <li id="features-3"></li>
+          </div>
+        </div>
+        <div>
+          <h1 class="text-3xl font-semibold text-black">Integrations</h1>
+          <div class="py-2">
+            <li id="Integrations-1"></li>
+            <li id="Integrations-2"></li>
+            <li id="Integrations-3"></li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-1 p-5 border-gray-300 border-[1px] rounded-lg relative ">
+    <img src="" alt="" class="w-full rounded-md" id="modal-image">
+    <div class="py-1 px-3 w-1/2 text-center absolute right-7 top-6 bg-[#EB5757] rounded-full text-white font-semibold text-2xl">
+      <h1 id="accuracy">95% accuracy</h1>
+    </div>
+     <h1 class="text-black text-xl font-medium py-2 text-center" id="image-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, consequatur.</h1>
+     <p class="text-xl font-medium text-center" id="extra">I'm doing well, thank you for asking. How can I assist you today?</p>
+    </div>
+    
+    <i class="fa-solid fa-circle-xmark text-3xl text-black absolute -right-2 -top-3" id="cancel" onclick="hideModal()"></i>
+    <!-- <i class="fa-solid fa-circle-xmark"></i> -->
+    </div>
+    
+ 
+
+  
+      
+</section>
+<script src="javascript/ai.js"></script>
+</body>
+</html>
